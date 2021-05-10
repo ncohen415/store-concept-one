@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
+import { media } from "../components/mq"
 
 //components
 import Layout from "../components/layout"
@@ -24,8 +25,9 @@ const HomePageContainer = styled.div`
   .slick-slider {
     display: flex;
     align-items: center;
-    height: 60vh;
     width: 100%;
+    height: 35vh;
+    ${media.medium`height: 60vh;`}
     .slick-prev {
       margin-left: 1rem;
       z-index: 3;
@@ -50,6 +52,8 @@ const HomePageContainer = styled.div`
         align-items: center;
         .slick-slide {
           height: 100% !important;
+          margin: 0 0.5rem 0 0.5rem;
+          ${media.medium`margin: 0;`}
           div {
             height: 60vh;
             .gatsby-image-wrapper {
@@ -72,35 +76,38 @@ const HomePageContainer = styled.div`
     height: 1px;
     background-color: white;
     width: 350px;
-    margin: 25px auto 25px auto;
+    margin: 5rem auto 5rem auto;
+    ${media.medium`margin: 25px auto 25px auto;`}
   }
 
   .featured-section {
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: space-between;
     padding-top: 1vh;
-    margin-bottom: 3rem;
+    ${media.medium`height: 100vh;`}
     .content-wrapper {
       width: 100%;
       display: flex;
+      flex-direction: column;
+      ${media.medium`flex-direction: row;`}
       .content-left {
         flex: 1 50%;
         h1 {
+          text-align: center;
           color: white;
           margin: 0;
           font-weight: 900;
-          font-size: 65px;
+          font-size: 10vh;
+          ${media.medium`text-align: left;`}
         }
         .slick-slider {
           display: flex;
           align-items: center;
-          height: 90vh;
-          width: 100%;
-          margin-left: -5rem;
+          height: 60vh;
+          ${media.medium`height: 75vh; width: 50vw;`}
           .slick-prev {
-            margin-left: 1rem;
+            display: none !important;
             z-index: 3;
             &.slick-prev::before {
               color: #708090;
@@ -108,7 +115,7 @@ const HomePageContainer = styled.div`
             }
           }
           .slick-next {
-            margin-right: 1rem;
+            display: none !important;
             z-index: 3;
             &.slick-next::before {
               color: #708090;
@@ -116,17 +123,19 @@ const HomePageContainer = styled.div`
             }
           }
           .slick-list {
-            height: 90vh;
-            width: 100%;
+            height: 75vh;
             .slick-track {
               display: flex !important;
               align-items: center;
               .slick-slide {
                 height: 100% !important;
+                margin: 0 0.5rem 0 0.5rem;
+                ${media.medium`margin: 0 1rem 0 0;`}
                 div {
-                  height: 90vh;
+                  height: 75vh;
                   .gatsby-image-wrapper {
                     height: inherit;
+                    padding: 0 1rem 0 1rem;
                     img {
                       object-fit: contain !important;
                       height: 100%;
@@ -139,55 +148,84 @@ const HomePageContainer = styled.div`
           }
         }
       }
+      .arrow-wrapper {
+        display: flex;
+        justify-content: center;
+        ${media.medium`height: 80%; justify-content: flex-end; flex-direction: column;`}
+        img {
+          margin: 0;
+          padding: 0;
+          height: 50px;
+          width: 50px;
+        }
+      }
       .content-right {
         flex: 1 50%;
+        margin-top: 40px;
+        ${media.medium`margin: 0;`}
         .streetwear-collection-wrapper {
           display: flex;
           flex-direction: column;
-          align-items: flex-end;
+          align-items: center;
+          ${media.medium`align-items: flex-end;`}
           h1 {
             color: white;
             width: 100%;
             font-weight: 900;
-            font-size: 65px;
-            text-align: right;
+            font-size: 10vh;
+            text-align: center;
             padding: 0;
             margin: 0 0 2rem 0;
+            ${media.medium`text-align: right;`}
           }
-          button {
-            width: 200px;
+          .shop-now {
+            width: 30%;
+            display: inline-block;
+            padding: 0.35em 1.2em;
+            border: 0.13em solid #ffffff;
             margin: 0 0 2rem 0;
-          }
-          p {
-            color: white;
-            text-align: right;
+            border-radius: 0.2em;
+            box-sizing: border-box;
+            text-decoration: none;
             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
               Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
               sans-serif;
-            font-size: 16px;
-            width: 70%;
-            line-height: 1;
-            margin: 0 0 2rem 0;
-          }
-          .arrow-wrapper {
+            font-weight: 600;
+            font-size: 2.5vh;
+            color: #ffffff;
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
+            height: 6vh;
             display: flex;
             justify-content: center;
-            width: 100%;
-            img {
-              height: 115px;
-              width: 115px;
+            align-items: center;
+            &:hover {
+              color: #000000;
+              background-color: #ffffff;
             }
+          }
+          p {
+            color: white;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+              sans-serif;
+            font-size: 2.5vh;
+            width: 70%;
+            line-height: 1;
+            ${media.medium`text-align: right;`}
           }
         }
       }
     }
   }
   .video-section {
-    height: 75vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    ${media.medium`height: 75vh;`}
     .video-wrapper {
       display: flex;
       justify-content: center;
@@ -200,7 +238,7 @@ const HomePageContainer = styled.div`
   }
   .new-arrivals-section {
     width: 100%;
-    height: 80vh;
+    ${media.medium`height: 75vh;`}
     h1 {
       margin: 0 0 25px 0;
       padding: 0;
@@ -212,51 +250,47 @@ const HomePageContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    height: 70vh;
+
     .content-wrapper {
       display: flex;
       align-items: center;
+      height: 100%;
       .content-left {
-        flex: 1 40%;
-        p {
-          color: white;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-          font-size: 16px;
-        }
-        h3 {
-          color: white;
+        display: flex;
+        flex-direction: column;
+        flex: 1 50%;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        .text-wrapper {
+          p {
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+              sans-serif;
+            font-size: 16px;
+          }
+          h3 {
+            color: white;
+          }
         }
       }
       .content-right {
-        flex: 1 60%;
+        display: flex;
+        justify-content: flex-end;
+        flex: 1 50%;
+        height: 100%;
         .image-wrapper {
           height: 100%;
+          width: 40vw;
           position: relative;
-          .image-wrapper-1 {
-            height: 60vh;
-            .gatsby-image-wrapper {
-              height: inherit;
-              img {
-                object-fit: contain !important;
-                height: 100%;
-                margin: 0;
-              }
-            }
-          }
-          .image-wrapper-2 {
-            height: 50vh;
-            position: absolute;
-            top: 35px;
-            left: 425px;
-            .gatsby-image-wrapper {
-              height: inherit;
-              img {
-                object-fit: contain !important;
-                height: 100%;
-                margin: 0;
-              }
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .gatsby-image-wrapper {
+            max-height: 100%;
+            img {
+              object-fit: contain !important;
             }
           }
         }
@@ -264,11 +298,11 @@ const HomePageContainer = styled.div`
     }
   }
   .sale-section {
-    height: 75vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    ${media.medium`height: 75vh;`}
     h1 {
       color: white;
     }
@@ -291,8 +325,9 @@ const HomePageContainer = styled.div`
         width: 100%;
         .image-wrapper {
           flex: 1 50%;
-          height: 85vh;
+          height: 40vh;
           width: 50vw;
+          ${media.medium`height: 85vh;`}
           .gatsby-image-wrapper {
             height: inherit;
             width: inherit;
@@ -314,12 +349,22 @@ const HomePageContainer = styled.div`
   }
 `
 const IndexPage = () => {
-  const slickSettings = {
+  const defaultSlickSettings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+  }
+
+  const featuredSlickSettings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: false,
+    pauseOnHover: true,
   }
 
   return (
@@ -330,14 +375,21 @@ const IndexPage = () => {
           <div class="content-wrapper">
             <div class="content-left">
               <h1>FEATURED</h1>
-              <Slider>
-                <StaticImage src="../images/ozer.jpeg" alt="aye" width={375} />
+              <Slider {...featuredSlickSettings}>
+                <StaticImage src="../images/ozer.jpeg" alt="aye" />
+                <StaticImage src="../images/ozer.jpeg" alt="aye" />
+                <StaticImage src="../images/ozer.jpeg" alt="aye" />
+                <StaticImage src="../images/ozer.jpeg" alt="aye" />
+                <StaticImage src="../images/ozer.jpeg" alt="aye" />
               </Slider>
+            </div>
+            <div class="arrow-wrapper">
+              <img src={ArrowDown} alt="boob" />
             </div>
             <div class="content-right">
               <div class="streetwear-collection-wrapper">
                 <h1>STREETWEAR CONCEPT COLLECTION</h1>
-                <button>hi</button>
+                <a className="shop-now">Shop Now</a>
                 <p>
                   Vexillologist coloring book air plant shabby chic poutine
                   edison bulb. Drinking vinegar chartreuse trust fund hell of
@@ -347,9 +399,6 @@ const IndexPage = () => {
                   forage, hexagon wolf thundercats aesthetic leggings. Deep v
                   fixie chillwave marfa pok pok butcher.
                 </p>
-                <div class="arrow-wrapper">
-                  <img src={ArrowDown} alt="hi" />
-                </div>
               </div>
             </div>
           </div>
@@ -371,7 +420,7 @@ const IndexPage = () => {
         <hr />
         <section class="new-arrivals-section">
           <h1>NEW ARRIVALS</h1>
-          <Slider {...slickSettings}>
+          <Slider {...defaultSlickSettings}>
             <StaticImage src="../images/ozer.jpeg" alt="hi" />
             <StaticImage src="../images/ozer.jpeg" alt="hi" />
             <StaticImage src="../images/ozer.jpeg" alt="hi" />
@@ -385,27 +434,24 @@ const IndexPage = () => {
         <section class="filler-section">
           <div class="content-wrapper">
             <div class="content-left">
-              <p>Enamel pin godard raclette bespoke franzen squid </p>
-              <h3>Chillwave vape cardigan viral next level</h3>
-              <p>
-                I'm baby dIY sustainable cred, vinyl banjo vice readymade.
-                Fingerstache ugh master cleanse migas cronut, narwhal fam
-                typewriter slow-carb. Synth +1 truffaut keytar deep v flannel.
-                Whatever chillwave 90's beard everyday carry hashtag freegan
-                scenester la croix pinterest hoodie small batch before they sold
-                out literally. Vape wolf listicle, distillery single-origin
-                coffee fixie normcore blue bottle vegan disrupt shaman gentrify
-                ennui. 8-bit hashtag heirloom chia.
-              </p>
+              <div class="text-wrapper">
+                <p>Enamel pin godard raclette bespoke franzen squid </p>
+                <h3>Chillwave vape cardigan viral next level</h3>
+                <p>
+                  I'm baby dIY sustainable cred, vinyl banjo vice readymade.
+                  Fingerstache ugh master cleanse migas cronut, narwhal fam
+                  typewriter slow-carb. Synth +1 truffaut keytar deep v flannel.
+                  Whatever chillwave 90's beard everyday carry hashtag freegan
+                  scenester la croix pinterest hoodie small batch before they
+                  sold out literally. Vape wolf listicle, distillery
+                  single-origin coffee fixie normcore blue bottle vegan disrupt
+                  shaman gentrify ennui. 8-bit hashtag heirloom chia.
+                </p>
+              </div>
             </div>
             <div class="content-right">
               <div class="image-wrapper">
-                <div class="image-wrapper-1">
-                  <StaticImage src="../images/ozer.jpeg" alt="hi" />
-                </div>
-                <div class="image-wrapper-2">
-                  <StaticImage src="../images/ozer.jpeg" alt="hi" />
-                </div>
+                <StaticImage src="../images/doubleozer.png" />
               </div>
             </div>
           </div>
@@ -413,7 +459,7 @@ const IndexPage = () => {
         <hr />
         <section class="sale-section">
           <h1>SALE</h1>
-          <Slider {...slickSettings}>
+          <Slider {...defaultSlickSettings}>
             <StaticImage src="../images/ozer.jpeg" alt="hi" />
             <StaticImage src="../images/ozer.jpeg" alt="hi" />
             <StaticImage src="../images/ozer.jpeg" alt="hi" />

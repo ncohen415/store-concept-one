@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { media } from "./mq"
+import { graphql, useStaticQuery } from "gatsby"
 
 //components
 import Nav from "./nav"
@@ -58,6 +59,26 @@ const HeaderContainer = styled.header`
 
 const Header = ({ siteTitle }) => {
   const [isOpen, setOpen] = useState(false)
+  const data = useStaticQuery(graphql`
+    query MenuQuery {
+      wpMenu(name: { eq: "Main Menu" }) {
+        menuItems {
+          nodes {
+            url
+            path
+            label
+          }
+        }
+      }
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
+  const menu = data?.wpMenu.menuItems?.nodes
+  console.log(menu)
   return (
     <HeaderContainer>
       <div class="header-wrapper">
@@ -67,7 +88,7 @@ const Header = ({ siteTitle }) => {
         <div class="hamburger-wrapper">
           <Hamburger toggled={isOpen} toggle={setOpen} color="#ffffff" />
         </div>
-        <Nav isOpen={isOpen} />
+        <Nav isOpen={isOpen} menu={menu} />
         <div class="cart-wrapper">
           <h3>Cart</h3>
         </div>

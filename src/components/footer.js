@@ -1,15 +1,17 @@
 import React from "react"
 import styled from "styled-components"
+import { media } from "./mq"
 
 const FooterContainer = styled.footer`
   width: 100%;
-  height: 300px;
+  height: 100%;
   display: flex;
   background-color: #343434;
   padding: 0 2rem 0 2rem;
   border-top: 1px solid white;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  ${media.small`height: 300px;`}
   .footer-wrapper {
     display: flex;
     align-items: baseline;

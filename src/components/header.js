@@ -1,7 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { media } from "./mq"
+
+//components
+import Nav from "./nav"
+import { Squash as Hamburger } from "hamburger-react"
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -13,40 +18,26 @@ const HeaderContainer = styled.header`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     .brand-wrapper {
       display: flex;
       flex-direction: column;
       justify-content: center;
       height: 100%;
       width: 25%;
+      z-index: 2;
       h3 {
         color: white;
         font-weight: 800;
+        font-size: 2vh;
         margin: 0;
         padding: 0;
       }
     }
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 50%;
-      .nav {
-        display: flex;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        .nav-item {
-          color: white;
-          padding: 0 1rem 0 1rem;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-          font-weight: 600;
-          margin: 0;
-        }
-      }
+    .hamburger-wrapper {
+      display: block;
+      z-index: 5;
+      ${media.medium`display: none;`}
     }
     .cart-wrapper {
       display: flex;
@@ -54,8 +45,10 @@ const HeaderContainer = styled.header`
       align-items: center;
       height: 100%;
       width: 25%;
+      z-index: 2;
       h3 {
         color: white;
+        font-size: 2vh;
         padding: 0;
         margin: 0;
       }
@@ -64,21 +57,17 @@ const HeaderContainer = styled.header`
 `
 
 const Header = ({ siteTitle }) => {
+  const [isOpen, setOpen] = useState(false)
   return (
     <HeaderContainer>
       <div class="header-wrapper">
         <div className="brand-wrapper">
           <h3>Concept Brand</h3>
         </div>
-        <div className="nav-wrapper">
-          <ul className="nav">
-            <li className="nav-item">Shop</li>
-            <li className="nav-item">Men</li>
-            <li className="nav-item">Women</li>
-            <li className="nav-item">About</li>
-            <li className="nav-item">Contact Us</li>
-          </ul>
+        <div class="hamburger-wrapper">
+          <Hamburger toggled={isOpen} toggle={setOpen} color="#ffffff" />
         </div>
+        <Nav isOpen={isOpen} />
         <div class="cart-wrapper">
           <h3>Cart</h3>
         </div>

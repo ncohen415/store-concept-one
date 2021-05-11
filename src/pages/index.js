@@ -26,7 +26,7 @@ const HomePageContainer = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    height: 35vh;
+    height: 55vh;
     ${media.medium`height: 60vh;`}
     .slick-prev {
       margin-left: 1rem;
@@ -75,9 +75,10 @@ const HomePageContainer = styled.div`
     border: 0;
     height: 1px;
     background-color: white;
-    width: 350px;
+
     margin: 5rem auto 5rem auto;
-    ${media.medium`margin: 25px auto 25px auto;`}
+    ${media.small`width: 350px;`}
+    ${media.medium`margin: 3rem auto 3rem auto;`}
   }
 
   .featured-section {
@@ -98,12 +99,14 @@ const HomePageContainer = styled.div`
           color: white;
           margin: 0;
           font-weight: 900;
-          font-size: 10vh;
+          font-size: 7vh;
+          ${media.small`font-size: 9vh;`}
           ${media.medium`text-align: left;`}
         }
         .slick-slider {
           display: flex;
           align-items: center;
+          height: 60vh;
           height: 60vh;
           ${media.medium`height: 75vh; width: 50vw;`}
           .slick-prev {
@@ -151,7 +154,8 @@ const HomePageContainer = styled.div`
       .arrow-wrapper {
         display: flex;
         justify-content: center;
-        ${media.medium`height: 80%; justify-content: flex-end; flex-direction: column;`}
+        margin: 4rem 0 0 0;
+        ${media.medium`height: 80%; justify-content: flex-end; flex-direction: column; margin: 0;`}
         img {
           margin: 0;
           padding: 0;
@@ -172,14 +176,15 @@ const HomePageContainer = styled.div`
             color: white;
             width: 100%;
             font-weight: 900;
-            font-size: 10vh;
+            font-size: 5vh;
             text-align: center;
             padding: 0;
             margin: 0 0 2rem 0;
+            ${media.small`font-size: 9vh;`}
             ${media.medium`text-align: right;`}
           }
           .shop-now {
-            width: 30%;
+            width: 50%;
             display: inline-block;
             padding: 0.35em 1.2em;
             border: 0.13em solid #ffffff;
@@ -200,6 +205,7 @@ const HomePageContainer = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
+            ${media.small`width: 30%;`}
             &:hover {
               color: #000000;
               background-color: #ffffff;
@@ -214,6 +220,7 @@ const HomePageContainer = styled.div`
             font-size: 2.5vh;
             width: 70%;
             line-height: 1;
+            width: 100%;
             ${media.medium`text-align: right;`}
           }
         }
@@ -250,11 +257,12 @@ const HomePageContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     width: 100%;
-
     .content-wrapper {
       display: flex;
       align-items: center;
       height: 100%;
+      flex-direction: column;
+      ${media.medium`flex-direction: row;`}
       .content-left {
         display: flex;
         flex-direction: column;
@@ -263,15 +271,21 @@ const HomePageContainer = styled.div`
         height: 100%;
         width: 100%;
         .text-wrapper {
+          align-items: center;
           p {
             color: white;
             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
               Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
               sans-serif;
             font-size: 16px;
+            text-align: center;
+            padding: 0;
+            ${media.medium`text-align: left; padding-right: 2rem;`}
           }
           h3 {
             color: white;
+            text-align: center;
+            ${media.medium`text-align: left;`}
           }
         }
       }
@@ -282,11 +296,12 @@ const HomePageContainer = styled.div`
         height: 100%;
         .image-wrapper {
           height: 100%;
-          width: 40vw;
           position: relative;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          padding: 0;
+          ${media.medium`width: 40vw; padding-left: 2rem;`}
           .gatsby-image-wrapper {
             max-height: 100%;
             img {
@@ -325,8 +340,8 @@ const HomePageContainer = styled.div`
         width: 100%;
         .image-wrapper {
           flex: 1 50%;
-          height: 40vh;
-          width: 50vw;
+          height: 20vh;
+          ${media.small`width: 50vw; height: 40vh;`}
           ${media.medium`height: 85vh;`}
           .gatsby-image-wrapper {
             height: inherit;
@@ -349,22 +364,51 @@ const HomePageContainer = styled.div`
   }
 `
 const IndexPage = () => {
-  const defaultSlickSettings = {
+  let defaultSlickSettings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 375,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
   }
 
-  const featuredSlickSettings = {
+  let featuredSlickSettings = {
     dots: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 2,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 375,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
   }
 
   return (

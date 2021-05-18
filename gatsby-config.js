@@ -9,6 +9,15 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-styled-components`,
     {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        shopName: "concept-brand-1",
+        accessToken: "c7e6a81917038cc6d6e03d1332ed6eee",
+        verbose: true,
+        paginationSize: 100,
+      },
+    },
+    {
       resolve: `gatsby-source-wordpress`,
       options: {
         url: "https://concept-one.nlcdev.site/graphql" || ``,

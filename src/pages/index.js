@@ -93,7 +93,8 @@ const HomePageContainer = styled.div`
       flex-direction: column;
       ${media.medium`flex-direction: row;`}
       .content-left {
-        flex: 1 50%;
+        flex: 1 1 50%;
+        ${media.large`margin: 0 25px 0 0;`}
         h1 {
           text-align: center;
           color: white;
@@ -104,10 +105,11 @@ const HomePageContainer = styled.div`
           ${media.medium`text-align: left;`}
         }
         .slick-slider {
-          display: flex;
+          display: inline-block;
           align-items: center;
           height: 60vh;
           height: 60vh;
+          margin-top: 1rem;
           ${media.medium`height: 75vh; width: 50vw;`}
           .slick-prev {
             display: none !important;
@@ -149,6 +151,9 @@ const HomePageContainer = styled.div`
               }
             }
           }
+          .slick-dots {
+            position: relative;
+          }
         }
       }
       .arrow-wrapper {
@@ -164,9 +169,10 @@ const HomePageContainer = styled.div`
         }
       }
       .content-right {
-        flex: 1 50%;
+        flex: 1 1 50%;
         margin-top: 40px;
         ${media.medium`margin: 0;`}
+        ${media.large`margin: 0 0 0 25px;`}
         .streetwear-collection-wrapper {
           display: flex;
           flex-direction: column;
@@ -433,7 +439,9 @@ const IndexPage = () => {
             <div class="content-right">
               <div class="streetwear-collection-wrapper">
                 <h1>STREETWEAR CONCEPT COLLECTION</h1>
-                <a className="shop-now">Shop Now</a>
+                <a className="shop-now" href="/">
+                  Shop Now
+                </a>
                 <p>
                   Vexillologist coloring book air plant shabby chic poutine
                   edison bulb. Drinking vinegar chartreuse trust fund hell of

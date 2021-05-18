@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { media } from "./mq"
+import { media } from "../mq"
 import { Link } from "gatsby"
 
 const NavItemWrapper = styled.li`
@@ -23,7 +23,6 @@ const NavItemWrapper = styled.li`
 `
 
 const NavItem = ({ menuItem }) => {
-  console.log(menuItem)
   return (
     <NavItemWrapper>
       <Link to={menuItem.url}>{menuItem.label}</Link>

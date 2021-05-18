@@ -1,9 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import { media } from "./mq"
+import { media } from "../mq"
 import { graphql, useStaticQuery } from "gatsby"
+
+//images
+import Cart from "../../images/cart.svg"
+
+//context
+import { StoreContext } from "../../context/StoreContext"
 
 //components
 import Nav from "./nav"
@@ -27,12 +33,15 @@ const HeaderContainer = styled.header`
       height: 100%;
       width: 25%;
       z-index: 2;
-      h3 {
-        color: white;
-        font-weight: 800;
-        font-size: 2vh;
-        margin: 0;
-        padding: 0;
+      a {
+        text-decoration: none;
+        h3 {
+          color: white;
+          font-weight: 800;
+          font-size: 2vh;
+          margin: 0;
+          padding: 0;
+        }
       }
     }
     .hamburger-wrapper {
@@ -47,11 +56,19 @@ const HeaderContainer = styled.header`
       height: 100%;
       width: 25%;
       z-index: 2;
-      h3 {
-        color: white;
-        font-size: 2vh;
+      button {
+        background: none;
+        color: inherit;
+        border: none;
         padding: 0;
-        margin: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        height: 24px;
+        img {
+          padding: 0;
+          margin: 0;
+        }
       }
     }
   }
@@ -59,6 +76,7 @@ const HeaderContainer = styled.header`
 
 const Header = ({ siteTitle }) => {
   const [isOpen, setOpen] = useState(false)
+  const { isCartOpen, addProductToCart, client } = useContext(StoreContext)
   const data = useStaticQuery(graphql`
     query MenuQuery {
       wpMenu(name: { eq: "Main Menu" }) {
@@ -78,19 +96,28 @@ const Header = ({ siteTitle }) => {
     }
   `)
   const menu = data?.wpMenu.menuItems?.nodes
-  console.log(menu)
+
   return (
     <HeaderContainer>
       <div class="header-wrapper">
         <div className="brand-wrapper">
-          <h3>Concept Brand</h3>
+          <a href="/">
+            <h3>Concept Brand</h3>
+          </a>
         </div>
         <div class="hamburger-wrapper">
-          <Hamburger toggled={isOpen} toggle={setOpen} color="#ffffff" />
+          <Hamburger
+            toggled={isOpen}
+            toggle={setOpen}
+            hideOutline={true}
+            color="#ffffff"
+          />
         </div>
         <Nav isOpen={isOpen} menu={menu} />
         <div class="cart-wrapper">
-          <h3>Cart</h3>
+          <button onClick={addProductToCart}>
+            <img src={Cart} alt="" />
+          </button>
         </div>
       </div>
     </HeaderContainer>

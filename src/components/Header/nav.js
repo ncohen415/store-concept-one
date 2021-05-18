@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { media } from "./mq"
+import { media } from "../mq"
 import { motion } from "framer-motion"
 
 //components
@@ -35,7 +35,6 @@ const NavWrapper = styled(motion.div)`
 `
 
 const Nav = ({ isOpen, menu }) => {
-  console.log(menu)
   return (
     <NavWrapper
       key="nav-wrapper"

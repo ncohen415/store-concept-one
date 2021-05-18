@@ -1,7 +1,8 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/browser-apis/
- */
+import React from "react"
 
-// You can delete this file if you're not using it
+//context
+import { StoreProvider } from "./src/context/StoreContext"
+
+export const wrapRootElement = ({ element }) => {
+  return <StoreProvider>{element}</StoreProvider>
+}

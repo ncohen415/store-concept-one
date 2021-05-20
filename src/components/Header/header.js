@@ -115,7 +115,7 @@ const Header = ({ siteTitle }) => {
         </div>
         <Nav isOpen={isOpen} menu={menu} />
         <div class="cart-wrapper">
-          <button onClick={addProductToCart}>
+          <button onClick={e => console.log("hi")}>
             <img src={Cart} alt="" />
           </button>
         </div>

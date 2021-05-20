@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
 
@@ -68,12 +68,43 @@ const CollectionGridItemContainer = styled.div`
 
 const CollectionGridItem = ({ product }) => {
   const [currentVariant, setCurrentVariant] = useState(product.variants[0])
+  const ref = useRef(currentVariant)
+
   const handleVariantChange = e => {
     let newVariant = product.variants.filter(
       variant => variant.shopifyId === e.target.value
     )[0]
+
     setCurrentVariant(newVariant)
   }
+
+  const hasMoreVariants = product.variants.filter(
+    variant => variant.selectedOptions[1]
+  )
+
+  let variantTypes = []
+  let selectors = {}
+  useEffect(() => {
+    product.variants.map(variant =>
+      variant.selectedOptions.map(option => {
+        if (!variantTypes.includes(option.name) && option.name !== "Title") {
+          variantTypes.push(option.name)
+        }
+      })
+    )
+    variantTypes.map(type => {
+      let matchingOptions = []
+      product.variants.map(variant =>
+        variant.selectedOptions.map(option => {
+          if (option.name === type && !matchingOptions.includes(option.value)) {
+            matchingOptions.push(option.value)
+          }
+        })
+      )
+      selectors[type] = matchingOptions
+    })
+  }, [])
+  console.log("variantTypes", variantTypes)
 
   return (
     <CollectionGridItemContainer>
@@ -87,14 +118,29 @@ const CollectionGridItem = ({ product }) => {
         <div class="shop-wrapper">
           <div class="details-wrapper">
             <p>{product.title}</p>
-            <p>$20</p>
+            <p>{currentVariant.price}</p>
           </div>
           <div class="options-wrapper">
-            <select
+            {variantTypes.map(type => {
+              let arrayOfOptions = selectors[type]
+              console.log("arrayOfOptions", arrayOfOptions)
+              return (
+                <select name={type.toLowerCase()} id="">
+                  {arrayOfOptions.map(option => {
+                    return (
+                      <option value={option.toLowerCase()}>{option}</option>
+                    )
+                  })}
+                </select>
+              )
+            })}
+            {/* <select
               name="Size Variant Prices"
               id=""
               onChange={e => handleVariantChange(e)}
             >
+
+
               {product.variants?.map(variant => {
                 return (
                   <option value={variant.shopifyId}>
@@ -103,7 +149,22 @@ const CollectionGridItem = ({ product }) => {
                 )
               })}
             </select>
+            {hasMoreVariants.length > 0 && (
+              <select
+                name="Size Variant Prices"
+                id=""
+                onChange={e => handleVariantChange(e)}
+              >
+                {product.variants?.map(variant => {
+                  return (
+                    <option value={variant.shopifyId}>
+                      {variant.selectedOptions[1]?.value}
+                    </option>
+                  )
+                })}
+              </select> */}
           </div>
+
           <div class="add-to-cart-wrapper">
             <AddToCart variantId={currentVariant.shopifyId} />
           </div>
